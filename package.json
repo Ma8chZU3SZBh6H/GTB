@@ -4,9 +4,17 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",
+    "@babel/plugin-transform-typescript": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
     "babel-loader": "^8.2.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
     "nodemon": "^2.0.15",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.12.5",
     "webpack-cli": "^4.9.1"
+  },
+  "dependencies": {
+    "sqlite3": "^5.0.2"
   }
 }

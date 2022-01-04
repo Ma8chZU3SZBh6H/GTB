@@ -4,7 +4,7 @@ module.exports = {
     target: 'node',
     entry: './src/index.ts',
     resolve: {
-        extensions: ['.ts']
+        extensions: [".ts", ".tsx", ".js", "jsx"],
     },
     module: {
         rules: [
@@ -22,5 +22,8 @@ module.exports = {
                 ],
             },
         ],
+    },
+    externals: {
+        sqlite3: 'sqlite3',
     },
 }
