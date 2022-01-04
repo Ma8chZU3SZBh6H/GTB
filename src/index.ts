@@ -16,7 +16,9 @@ app.use(express.urlencoded({ extended: true }));
 AppRoutes(app);
 
 (async () => {
-    await sequelize.sync({force: true});
+    await import('./models/AppModel');
+    await import('./models/EmailModel');
+    await sequelize.sync({force: false});
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}.`);
     });

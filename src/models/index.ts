@@ -1,7 +1,5 @@
 import dbConfig from "../config/db.config";
 import {Sequelize} from 'sequelize';
-import "./AppModel";
-import "./EmailModel";
 
 const sequelize = new Sequelize('database', '', '', {
     pool: {
