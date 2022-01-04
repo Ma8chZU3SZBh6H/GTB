@@ -6,6 +6,7 @@
     "@babel/core": "^7.16.7",
     "@babel/plugin-transform-typescript": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
+    "axios": "^0.24.0",
     "babel-loader": "^8.2.3",
     "cors": "^2.8.5",
     "express": "^4.17.2",

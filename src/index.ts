@@ -13,12 +13,12 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-AppRoutes(app);
+AppRoutes(app, '/api/steam/apps');
 
 (async () => {
     await import('./models/AppModel');
     await import('./models/EmailModel');
-    await sequelize.sync({force: false});
+    await sequelize.sync({force: true});
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}.`);
     });
