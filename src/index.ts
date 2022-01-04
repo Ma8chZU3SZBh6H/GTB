@@ -18,7 +18,7 @@ AppRoutes(app, '/api/steam/apps');
 (async () => {
     await import('./models/AppModel');
     await import('./models/EmailModel');
-    await sequelize.sync({force: true});
+    await sequelize.sync({force: false});
     app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}.`);
     });

@@ -3,6 +3,7 @@ import AppModel from "../models/AppModel";
 import {sleep} from "../utils/sleep";
 import {States} from "./AppController..enums";
 import {updateApps} from "../apis/steam/apps/apps.update";
+import {findByName} from "../apis/steam/apps/apps";
 
 export async function all(req : Request, res : Response){
     const apps = await AppModel.findAll();
@@ -49,13 +50,13 @@ export async function update(req : Request, res : Response){
     }
 }
 
-export async function show(req : Request, res : Response){
-    const appId = req.params.id;
-    const app = await AppModel.findByPk(appId);
-    if (app){
+export async function search(req : Request, res : Response){
+    const name = req.params.name;
+    const apps = await findByName(name, 100);
+    if (apps){
         res.send({
             successful: true,
-            payload: app
+            payload: apps
         });
     }
     else{
