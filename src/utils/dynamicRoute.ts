@@ -7,9 +7,7 @@ function exe(defaultState, callback){
         defaultState.payload = payload;
         defaultState.state = States.done;
     }).catch((payload)=>{
-        if (payload){
-            defaultState.wtf = payload;
-        }
+        defaultState.wtf = payload ?? 'Failed.';
         defaultState.state = States.failed;
     })
 }
