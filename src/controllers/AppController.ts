@@ -4,35 +4,22 @@ import {States} from "./AppController.enums";
 import {updateApps} from "../apis/steam/apps/apps.update";
 import {findByName} from "../apis/steam/apps/apps";
 import response from "../constants/response";
+import {sleep} from "../utils/sleep";
 
 export async function all(req : Request, res : Response){
-    const apps = await AppModel.findAll();
+    const limit = req.query.limit;
+    const apps = await AppModel.findAll({limit: limit ?? 100});
     res.send(response.failIfNull(apps));
 }
 
-let appsUpdate = States.free;
 export async function update(req : Request, res : Response){
-    switch (appsUpdate) {
-        case States.done:
-            appsUpdate = States.free;
-            res.send(response.successful(States.done));
-            break;
-        case States.busy:
-            res.send(response.failed(States.busy));
-            break;
-        case States.free:
-        default:
-            appsUpdate = States.busy;
-            res.send(response.successful(States.busy));
-            await updateApps();
-            appsUpdate = States.done;
-            break;
-    }
+    await response.auto(res, async ()=>await updateApps());
 }
 
 export async function search(req : Request, res : Response){
     const name = req.params.name;
-    const apps = await findByName(name, 100);
+    const limit = req.query.limit;
+    const apps = await findByName(name, limit ?? 100);
     res.send(response.failIfNull(apps));
 }
 

@@ -8,7 +8,7 @@ export async function all(req : Request, res : Response){
     res.send(emails);
 }
 
+
 export async function create(req : Request, res : Response){
-    const account = await createRumblerAccount();
-    res.send(response.failIfNull(account));
+    await response.auto(res, async ()=>await createRumblerAccount());
 }
