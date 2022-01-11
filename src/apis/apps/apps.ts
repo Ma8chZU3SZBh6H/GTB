@@ -1,6 +1,6 @@
-import AppModel from "../../../models/AppModel";
-import {pluck} from "../../../utils/pluck";
-import AppModelType from "../../../models/AppModel.types";
+import AppModel from "../../models/AppModel";
+import {pluck} from "../../utils/pluck";
+import AppModelType from "../../models/AppModel.types";
 import {Op} from "sequelize";
 
 

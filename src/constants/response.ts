@@ -1,5 +1,5 @@
 import {States} from "../controllers/AppController.enums";
-import {updateApps} from "../apis/steam/apps/apps.update";
+import {updateApps} from "../apis/apps/apps.update";
 import {Request, Response} from 'express';
 
 function successful(data:any) {

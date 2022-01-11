@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import * as fs from 'fs';
 import { AppDetails, Data, SteamAppsType } from './fetch.types';
-import {sleep} from "../../../utils/sleep";
+import {sleep} from "../../utils/sleep";
 
 async function get(url: string) {
   for (let i = 0; i < 3; i++) {

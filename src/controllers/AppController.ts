@@ -1,8 +1,8 @@
 import {Request, Response} from 'express';
 import AppModel from "../models/AppModel";
 import {States} from "./AppController.enums";
-import {updateApps} from "../apis/steam/apps/apps.update";
-import {findByName} from "../apis/steam/apps/apps";
+import {updateApps} from "../apis/apps/apps.update";
+import {findByName} from "../apis/apps/apps";
 import response from "../constants/response";
 import {sleep} from "../utils/sleep";
 

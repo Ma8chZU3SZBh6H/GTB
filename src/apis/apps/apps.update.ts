@@ -1,7 +1,7 @@
 import {SteamAppsType, App as SteamApp} from "./fetch.types";
 import {getapps} from "./fetch";
-import AppModelType from "../../../models/AppModel.types";
-import AppModel from "../../../models/AppModel";
+import AppModelType from "../../models/AppModel.types";
+import AppModel from "../../models/AppModel";
 
 export async function updateApps() {
     const {
