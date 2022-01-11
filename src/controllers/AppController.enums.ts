@@ -1,5 +1,6 @@
 export enum States{
     free,
     busy,
-    done
+    done,
+    failed
 }

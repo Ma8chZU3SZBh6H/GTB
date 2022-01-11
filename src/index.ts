@@ -6,6 +6,7 @@ import EmailRoutes from "./routes/EmailRoutes";
 import * as dotenv from 'dotenv'
 import puppeteer from "puppeteer-extra";
 import anticaptcha from '@antiadmin/anticaptchaofficial';
+import SteamRoutes from "./routes/SteamRoutes";
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 
 dotenv.config()
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 
 AppRoutes(app, '/api/steam/apps');
 EmailRoutes(app, '/api/account/rambler');
+SteamRoutes(app, '/api/account/steam');
 
 (async () => {
     await import('./models/AppModel');

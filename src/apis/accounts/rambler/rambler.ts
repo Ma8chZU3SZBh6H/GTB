@@ -5,13 +5,13 @@ import {
   ramblerInputSelectorValue,
   ramblerCaptchaAnswerInput,
   ramblerRegisterButton,
-} from "./ramblerAcc.providers";
+} from "./rambler.providers";
 import accGenerator from "../../../utils/accGenerator";
 import EmailModel from "../../../models/EmailModel";
 import Browser from "../../../utils/browser";
 import twoCaptchaBase64 from "../../../utils/twoCaptchaBase64";
 
-const createRumblerAccount = async () : Promise<{email:string, password:string, host:string} | null>  => {
+const createRumblerAccount = async () : Promise<{name:string, password:string, host:string} | null>  => {
   const acc = accGenerator();
   const {page, browser} = await Browser();
 
@@ -41,15 +41,8 @@ const createRumblerAccount = async () : Promise<{email:string, password:string, 
 
     await browser.close();
 
-    await EmailModel.create({
-      email: acc.email,
-      password: acc.password,
-      host: 'rambler.ru',
-      used: false
-    });
-
     return {
-      email: acc.email,
+      name: acc.email,
       password: acc.password,
       host: 'rambler.ru'
     }

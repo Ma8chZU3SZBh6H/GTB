@@ -3,7 +3,7 @@ import AppModel from "../models/AppModel";
 import {States} from "./AppController.enums";
 import {updateApps} from "../apis/apps/apps.update";
 import {findByName} from "../apis/apps/apps";
-import response from "../constants/response";
+import response from "../utils/response";
 import {sleep} from "../utils/sleep";
 
 export async function all(req : Request, res : Response){
@@ -12,8 +12,9 @@ export async function all(req : Request, res : Response){
     res.send(response.failIfNull(apps));
 }
 
-export async function update(req : Request, res : Response){
-    await response.auto(res, async ()=>await updateApps());
+export async function update(resolve, reject, wtf){
+    wtf('Updating apps...');
+    resolve(await updateApps());
 }
 
 export async function search(req : Request, res : Response){
