@@ -1,6 +1,6 @@
 import {States} from "../controllers/AppController.enums";
 
-function successful(payload:any = null, state : States = States.free, msg  = null) {
+function successful(payload:any = null, state : States = States.done, msg  = null) {
     return {
         state: state,
         message: msg,

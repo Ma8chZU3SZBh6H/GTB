@@ -3,10 +3,15 @@ import anticaptcha from '@antiadmin/anticaptchaofficial';
 import Browser from "../../../utils/browser";
 import {registerSteamAddress} from "./steam.providers";
 import {Model} from "sequelize";
+import * as fs from 'fs';
+import * as path from "path";
+import getCaptcha from "../../../scripts/getCaptcha";
+import {sleep} from "../../../utils/sleep";
 
 const createSteamAccount = async (EmailAcc : Model<EmailModelType>) => {
-    return;
+
     const {page, browser} = await Browser();
+
     const balance = await anticaptcha.getBalance();
 
     if (balance <= 0) {
@@ -24,16 +29,14 @@ const createSteamAccount = async (EmailAcc : Model<EmailModelType>) => {
         await page.waitForTimeout(1266);
         await page.type('#reenter_email', EmailAcc.get('name')  + '@rambler.ru');
 
-        console.log('ONE');
         await page.waitForSelector('[title="reCAPTCHA"]');
         let iframeUrl = await page.$eval('[title="reCAPTCHA"]', (iframe) => iframe.getAttribute('src'));
         iframeUrl = iframeUrl?.split('&k=')[1]!;
         iframeUrl = iframeUrl?.split('&co=')[0]!;
-        console.log('TWO');
-        const s = await page.evaluate(`___grecaptcha_cfg.clients['0']['X']['X'].s`);
-        console.log('three');
-        console.log('s:', s);
-        console.log('iframe', iframeUrl);
+
+        const captcha = await getCaptcha(page);
+        const callback = captcha.callback.replace("['callback']", '.s');
+        const s = await page.evaluate(callback);
 
         const token = await anticaptcha.solveRecaptchaV2EnterpriseProxyless('https://store.steampowered.com/join', iframeUrl, {s: s,});
 

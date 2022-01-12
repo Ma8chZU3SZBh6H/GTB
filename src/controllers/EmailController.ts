@@ -5,7 +5,7 @@ import response from "../utils/response";
 
 export async function all(req : Request, res : Response){
     const emails = await EmailModel.findAll();
-    res.send(emails);
+    res.send(response.failIfNull(emails));
 }
 
 
