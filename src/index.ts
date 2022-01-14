@@ -8,6 +8,7 @@ import puppeteer from "puppeteer-extra";
 import ReCaptchaPlugin from "puppeteer-extra-plugin-recaptcha";
 import anticaptcha from '@antiadmin/anticaptchaofficial';
 import SteamRoutes from "./routes/SteamRoutes";
+import TestRouter from "./routes/TestRouter";
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 
 dotenv.config()
@@ -33,6 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 AppRoutes(app, '/api/steam/apps');
 EmailRoutes(app, '/api/account/rambler');
 SteamRoutes(app, '/api/account/steam');
+TestRouter(app, '/api/tests');
 
 (async () => {
     await import('./models/AppModel');

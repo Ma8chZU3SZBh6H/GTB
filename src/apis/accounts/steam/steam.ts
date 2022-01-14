@@ -41,12 +41,10 @@ const createSteamAccount = async (EmailAcc : Model<EmailModelType>) => {
         await page.waitForSelector('body > div:nth-child(5)', { visible: true, timeout: 7000 });
 
         await browser.close();
-        await sleep(100000);
         return true;
 
     } catch (error) {
         console.log(error);
-        await sleep(100000);
         await browser.close();
         return false;
     }
