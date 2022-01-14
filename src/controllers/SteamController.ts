@@ -15,7 +15,7 @@ export async function create(resolve, reject, wtf) {
     const email = await EmailModel.findOne<Model<EmailModelType>>({
         where: {
             used:{
-                [Op.lte]: moment().add(10,'minutes').toDate()
+                [Op.lte]: moment().subtract(10,'minutes').toDate()
             },
             verified: null
         },
