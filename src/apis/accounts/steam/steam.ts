@@ -9,7 +9,6 @@ import getCaptcha from "../../../scripts/getCaptcha";
 import {sleep} from "../../../utils/sleep";
 
 const createSteamAccount = async (EmailAcc : Model<EmailModelType>) => {
-
     const {page, browser} = await Browser();
 
     const balance = await anticaptcha.getBalance();
@@ -29,18 +28,7 @@ const createSteamAccount = async (EmailAcc : Model<EmailModelType>) => {
         await page.waitForTimeout(1266);
         await page.type('#reenter_email', EmailAcc.get('name')  + '@rambler.ru');
 
-        await page.waitForSelector('[title="reCAPTCHA"]');
-        let iframeUrl = await page.$eval('[title="reCAPTCHA"]', (iframe) => iframe.getAttribute('src'));
-        iframeUrl = iframeUrl?.split('&k=')[1]!;
-        iframeUrl = iframeUrl?.split('&co=')[0]!;
-
-        const captcha = await getCaptcha(page);
-        const callback = captcha.callback.replace("['callback']", '.s');
-        const s = await page.evaluate(callback);
-
-        const token = await anticaptcha.solveRecaptchaV2EnterpriseProxyless('https://store.steampowered.com/join', iframeUrl, {s: s,});
-
-        await page.evaluate(`document.getElementById("g-recaptcha-response").innerHTML="${token}";`);
+        await page.solveRecaptchas();
 
         await page.click('#i_agree_check');
 
@@ -53,11 +41,12 @@ const createSteamAccount = async (EmailAcc : Model<EmailModelType>) => {
         await page.waitForSelector('body > div:nth-child(5)', { visible: true, timeout: 7000 });
 
         await browser.close();
-
+        await sleep(100000);
         return true;
 
     } catch (error) {
         console.log(error);
+        await sleep(100000);
         await browser.close();
         return false;
     }

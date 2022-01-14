@@ -5,6 +5,7 @@ import AppRoutes from "./routes/AppRoutes";
 import EmailRoutes from "./routes/EmailRoutes";
 import * as dotenv from 'dotenv'
 import puppeteer from "puppeteer-extra";
+import ReCaptchaPlugin from "puppeteer-extra-plugin-recaptcha";
 import anticaptcha from '@antiadmin/anticaptchaofficial';
 import SteamRoutes from "./routes/SteamRoutes";
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
@@ -13,6 +14,13 @@ dotenv.config()
 
 anticaptcha.setAPIKey(process.env.ANTI_CAPTCHA_KEY);
 puppeteer.use(StealthPlugin());
+puppeteer.use(ReCaptchaPlugin({
+    provider: {
+        id: '2captcha',
+        token: process.env.TWO_CAPTCHA_KEY // REPLACE THIS WITH YOUR OWN 2CAPTCHA API KEY ⚡
+    },
+    visualFeedback: true // colorize reCAPTCHAs (violet = detected, green = solved)
+}))
 
 const app = express();
 const corsOptions = { origin: "http://localhost:3000"};

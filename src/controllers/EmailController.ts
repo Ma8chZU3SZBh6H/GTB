@@ -18,7 +18,7 @@ export async function create(resolve, reject, wtf){
             name: acc.name,
             password: acc.password,
             host: 'rambler.ru',
-            used: false
+            used: Date.now(),
         });
         wtf('Email created!');
         resolve(acc);
@@ -27,3 +27,4 @@ export async function create(resolve, reject, wtf){
         reject('Failed to create email');
     }
 }
+

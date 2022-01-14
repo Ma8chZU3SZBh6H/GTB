@@ -5,7 +5,8 @@ const EmailModel = sequelize.define('email', {
     host: DataTypes.STRING,
     name: DataTypes.STRING,
     password: DataTypes.STRING,
-    used: DataTypes.BOOLEAN,
+    used: DataTypes.DATE,
+    verified: DataTypes.DATE
 }, );
 
 
